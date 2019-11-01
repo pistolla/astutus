@@ -1,0 +1,14 @@
+version: '3'
+services:
+  www:
+
+    volumes:
+      - .:/opt/app/
+    command: "npx pm2 start server.js --no-daemon"
+    ports:
+      - '80:80'
+    build:
+      context: .
+    restart: always
+
+
