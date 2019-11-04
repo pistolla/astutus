@@ -3,12 +3,14 @@ import { Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Container, Typography, Tabs, Tab, Paper } from '@material-ui/core';
+import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
 import DeveloperModeIcon from '@material-ui/icons/DeveloperMode';
 import { MetaMask } from './components/metamask/Metamask';
 import Account from './components/account/Account';
 import Media from './components/media/Media';
 import Main from './components/main/Main';
 import About from './components/about/About';
+import Sandbox from './components/sandbox/Sandbox';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchMediaUrls, getMyMediaUrls, postMediaUrl } from './actions';
@@ -38,13 +40,20 @@ class App extends Component {
       paddingBottom: 0
     },
     appbar: {
-      zIndex: theme.zIndex.drawer + 1
+      zIndex: theme.zIndex.drawer + 1,
+      background: 'transparent !important', 
+      boxShadow: 'none'
+    },
+    toolbar: {
+      background: 'transparent', 
+      boxShadow: 'none'
     },
     main: {
       display: 'flex',
       flexDirection: 'column',
       minHeight: '100vh',
-      height: '100vh'
+      height: '100vh',
+      backgroundImage: `url("${"assets/astutus_background.png"}")`
     },
     footerContainer: {
       maxHeight: '100px',
@@ -88,13 +97,13 @@ class App extends Component {
   render() {
     return (
         <div className={this.classes.root} data-test="AppComponent">
-          <AppBar position="absolute" className={this.classes.appbar}>
-            <Toolbar>
+          <AppBar position="static" className={this.classes.appbar} style={{background: 'transparent !important'}}>
+            <Toolbar className={this.classes.toolbar}>
               <IconButton edge="start" className={this.classes.menuButton} color="inherit" aria-label="menu">
                 <DeveloperModeIcon />
               </IconButton>
               <Typography variant="h6" className={this.classes.title}>
-                KWANTA
+                Astutus
               </Typography>
               <Tabs
                 edge="center"
@@ -102,21 +111,16 @@ class App extends Component {
                 className={this.classes.sectionDesktop}
                 value={this.state.value}
                 onChange={this.handleChange}
-                textColor="inherit"
+                textColor="white"
                 centered
+                inkBarStyle={{background: '#f4c384'}}
               >
-                <Tab label="Search" component={Link} to="/" className={this.classes.navTab} />
-                <Tab label="Watch List" component={Link} to="/watchlinks" className={this.classes.navTab} />
-                <Tab label="Wallet" component={Link} to="/wallet" className={this.classes.navTab} />
+                <Tab label="Home" component={Link} to="/" className={this.classes.navTab} />
+                <Tab label="SandBox" component={Link} to="/watchlinks" className={this.classes.navTab} />
+                <Tab label="Account" component={Link} to="/wallet" className={this.classes.navTab} />
                 <Tab label="Get Started" component={Link} to="/getstarted" className={this.classes.navTab} />
               </Tabs>
-              <MetaMask 
-              {...this.props} 
-              web3={this.state.web3} 
-              metaMask={this.state.metamask}
-              setWeb3={this.setWeb3} 
-              handleMetaMaskAccount={this.setUserAccount}
-              handleMetaMaskNetwork={this.setMetaMaskNetwork}/>
+              
             </Toolbar>
           </AppBar>
           <Container className={this.classes.main} maxWidth="lg" >
@@ -124,10 +128,10 @@ class App extends Component {
               <Route exact path="/">
                 <Main {...this.props} />
               </Route>
-              <Route path="/watchlinks">
-                <Media {...this.props} connected={this.state.connected} account={this.state.account} web3={this.state.web3} />
+              <Route path="/sandbox">
+                <Sandbox {...this.props} connected={this.state.connected} account={this.state.account} web3={this.state.web3} />
               </Route>
-              <Route path="/wallet">
+              <Route path="/account">
                 <Account {...this.props} connected={this.state.connected} account={this.state.account} web3={this.state.web3} />
               </Route>
               <Route path="/getstarted">
@@ -137,7 +141,7 @@ class App extends Component {
           </Container>
           <footer className={this.classes.footerContainer}>
             
-              <Typography paragraph align="center" width="fullWidth">{`Made with love by Dataphile for DEVCON2019 Gitcoin Hackathon. Copyright 2019.`}</Typography>
+              <Typography paragraph align="center" width="fullWidth">{`Made with love by @Codesafi. Copyright 2019.`}</Typography>
             
           </footer>
         </div>

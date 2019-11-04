@@ -30,9 +30,13 @@ const theme = createMuiTheme({
         tooltip: 1500
     },
     palette: {
-        primary: { main: '#4CAF50' },
-        secondary: { main: '#AA00FF', contrastText: '#9E9E9E' }
+        primary: { main: '#f4c384', contrastText: '#FFFFFF' },
+        secondary: { main: '#425d7c', contrastText: '#FFFFFF' }
     },
+    shadows: ["none"],
+    inkBar: {
+        backgroundColor: '#f4c384'
+    }
 });
 ReactDOM.render(
     <Provider store={configureStore()}>
