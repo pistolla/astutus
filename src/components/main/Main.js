@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import Asthero from '../asthero/Asthero';
+import WhitePaper from '../whitepaper/WhitePaper';
 
 const classes = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    marginTop: '120px',
     color: theme.palette.common.white,
     position: 'relative',
     display: 'flex',
@@ -27,15 +28,10 @@ const classes = makeStyles(theme => ({
     opacity: 0.5,
     zIndex: -1,
   },
-  background: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    zIndex: -2,
+  sectionHero: {
+    paddingBottom: theme.spacing(5),
+    paddingTop: theme.spacing(5)
+    
   },
   arrowDown: {
     position: 'absolute',
@@ -46,27 +42,18 @@ const classes = makeStyles(theme => ({
 
 function Main(props) {
   const [searching, setSearching] = useState(false);
-  
+
   return (
     <Grid className={classes.root} container data-test="MainComponent">
-      <Grid item xs={12} width="100%">
-        <div className={classes.section}> 
-          
+      <Grid item xs={12} width="100%" className={classes.sectionHero}>
         <Asthero />
-        <div className={classes.backdrop} />
-        <div className={classes.background} />
-        
-        </div>
       </Grid>
       <Grid item xs={12} width="100%">
-
+        <Container maxWidth="lg">
+          <WhitePaper />
+        </Container>
       </Grid>
-      <Grid item xs={12} width="100%">
 
-      </Grid>
-      <Grid item xs={12} width="100%">
-
-      </Grid>
     </Grid>
   );
 }

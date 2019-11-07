@@ -1,17 +1,17 @@
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux';
+import App from './App';
 import configureStore, { history } from './createStore';
-import { ConnectedRouter } from 'connected-react-router';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
 //import * as serviceWorker from './serviceWorker';
 const theme = createMuiTheme({
     overrides: {
         MuiGrid: {
             root: {
-                marginTop: '120px'
+                marginTop: '50px'
             },
         },
         MuiTabs: {
@@ -30,8 +30,9 @@ const theme = createMuiTheme({
         tooltip: 1500
     },
     palette: {
-        primary: { main: '#f4c384', contrastText: '#FFFFFF' },
-        secondary: { main: '#425d7c', contrastText: '#FFFFFF' }
+        primary: { main: 'rgba(244, 195, 132, 0.3)', contrastText: '#FFFFFF' },
+        secondary: { main: '#425d7c', contrastText: '#FFFFFF' },
+        text: { secondary: '#425d7c', primary: '#FFFFFF', disabled: 'rgba(0, 0, 0, 0.38)' },
     },
     shadows: ["none"],
     inkBar: {
